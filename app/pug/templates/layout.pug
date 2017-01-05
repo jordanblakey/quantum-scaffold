@@ -18,17 +18,9 @@ html(lang="en")
                 //- "block" specifies an area that can be edited when the .pug is called in another file with "extends".
                 .column#header(data-name="box", custom-attr="whatevs" )
                     block header
-                        h2 Hello #{name}!
-                        ul
-                            while wloop <= 9
-                                li Testing, #{wloop++}, #{wloop++}, #{wloop++}
-
+                        p I'm the default header content in layout.pug.
         .container
             .row
                 .column#main
                     block main
-                        h1 Testing Iteration
-                        ul
-                            each fruit, i in fruitBowl
-                                li Fruit #{i + 1}: #{fruit}
-        
+                        p I'm the default main area in layout.pug.

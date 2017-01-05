@@ -2,3 +2,15 @@ extends templates/layout
 //- include templates/layout
 //- Like Sass, partials can be *included* as above.
 //- However, in Pug we can *extend* a tempate, which allows us to manipulate its output.
+
+block header
+    h2 Hello #{name}!
+    ul
+        while wloop <= 9
+            li Testing, #{wloop++}, #{wloop++}, #{wloop++}
+
+block main
+    h1 Testing Iteration, and extends/includes, and interplolated content blocks all at the once, dawg.
+    ul
+        each fruit, i in fruitBowl
+            li Fruit #{i + 1}: #{fruit}
