@@ -37,6 +37,7 @@ var paths = {
     // GARBAGE COLLECTION
     buildScss: 'build/scss',
     buildJsUnmin: 'build/js/!(*.min.js)',
+    buildPug: 'build/pug'
 };
 
 // //////////////////////////////////////////////////////
@@ -130,7 +131,8 @@ gulp.task('build:remove', ['build:copy'], function(cb){
     del([
         paths.buildScss,
         // 'build/js/!(app.min.js)'
-        paths.buildJsUnmin
+        paths.buildJsUnmin,
+        paths.buildPug,
     ], cb);
 });
 
