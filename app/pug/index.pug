@@ -1,27 +1,4 @@
-- var pageTitle = 'Toast Grids ToGo'
-- var name = 'Jordan'
-- var fruitBowl = ['banana', 'apple', 'mango']
-
-doctype
-html(lang="en")
-    // This comment will appear in compiled HTML.
-    //- This comment will not appear in compiled HTML.
-    head
-        title #{pageTitle}
-        link(rel="stylesheet",href="css/app.css")
-
-    body
-        .container
-            .row
-                .column#myBox(data-name="box", )
-                    h1 Some Changes Here
-                    p Some text
-                    h2 Hello #{name}!
-                    p Testing
-        div.container
-            div.row
-                div.column
-                    h1 Some Changes Here
-                    ul
-                        each fruit in fruitBowl
-                            li I have a #{fruit}
+extends templates/layout
+//- include templates/layout
+//- Like Sass, partials can be *included* as above.
+//- However, in Pug we can *extend* a tempate, which allows us to manipulate its output.
