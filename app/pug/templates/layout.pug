@@ -1,7 +1,9 @@
-- var pageTitle = 'Toast Grids ToGo'
-- var name = 'Jordan'
-- var fruitBowl = ['banana', 'apple', 'mango']
-- var wloop = 1
+block config
+    - var pageTitle = 'Toast Grids ToGo'
+    - var name = 'Jordan'
+    - var age = 30
+    - var fruitBowl = ['banana', 'apple', 'mango']
+    - var wloop = 1
 
 doctype
 html(lang="en")
@@ -13,6 +15,9 @@ html(lang="en")
 
     body
         //- Class names imply a div element at compile.
+        nav
+            block navigation
+
         .container
             .row
                 //- "block" specifies an area that can be edited when the .pug is called in another file with "extends".
@@ -24,3 +29,9 @@ html(lang="en")
                 .column#main
                     block main
                         p I'm the default main area in layout.pug.
+        .container
+            .row
+                .column#products
+                    block products
+                        h1 Default Block
+                        p This block came from the original tempalate, layout.pug. You can use the products mixin here.

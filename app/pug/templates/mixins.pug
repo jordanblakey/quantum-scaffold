@@ -1,0 +1,11 @@
+mixin product(title, imageID, price)
+    .product
+        .product__wrapper
+            img.product__img(src="http://lorempixel.com/400/200/")
+            .product__content
+                h2.product__title #{title}
+                p.product__price AU$ #{price}
+
+mixin navLink(link, name)
+    li
+        a(href=link) #{name}

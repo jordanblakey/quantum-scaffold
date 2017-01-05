@@ -1,10 +1,22 @@
 extends templates/layout
+include templates/mixins
 //- include templates/layout
 //- Like Sass, partials can be *included* as above.
 //- However, in Pug we can *extend* a tempate, which allows us to manipulate its output.
 
+block append config
+    - var name = 'Danny'
+    - var age = 60
+
+block navigation
+    ul
+        +navLink('home.html', 'Home')
+        +navLink('about.html', 'About')
+        +navLink('work.html', 'Work')
+        +navLink('contact.html', 'Contact')
+
 block header
-    h2 Hello #{name}!
+    h2 Hello #{name}! You are #{age} today!
     ul
         while wloop <= 9
             li Testing, #{wloop++}, #{wloop++}, #{wloop++}
@@ -14,3 +26,11 @@ block main
     ul
         each fruit, i in fruitBowl
             li Fruit #{i + 1}: #{fruit}
+
+block products
+    .products
+        +product('iPhone5', 400/300, '499')
+        +product('iPhone6', 401, '599')
+        +product('iPhone7', 402, '699')
+        +product('iPhone8', 403, '799')
+        +product('iPhone9', 404, '899')
