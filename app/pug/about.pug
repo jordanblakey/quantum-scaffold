@@ -1,0 +1,21 @@
+extends templates/layout
+include templates/mixins
+//- include templates/layout
+//- Like Sass, partials can be *included* as above.
+//- However, in Pug we can *extend* a tempate, which allows us to manipulate its output.
+
+block append config
+    - var currentPage = 'About'
+
+block navigation
+    ul
+        +navLink('index.html', 'Home')
+        +navLink('about.html', 'About')
+        +navLink('work.html', 'Work')
+        +navLink('contact.html', 'Contact')
+
+//- block header
+
+//- block main
+
+//- block products

@@ -8,4 +8,4 @@ mixin product(title, imageID, price)
 
 mixin navLink(link, name)
     li
-        a(href=link) #{name}
+        a(href=link class={active: name === currentPage}) #{name}
