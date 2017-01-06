@@ -22,7 +22,7 @@ var paths = {
 
     // HTML & PUG TEMPLATING
     html: 'app/**/*.html',
-    pug: 'app/pug/*.pug',
+    pug: 'app/pug/**/*.pug',
 
     // JS MINIFICATION & WATCH
     js: 'app/js/**/*.js',
@@ -30,7 +30,7 @@ var paths = {
     jsdir: 'app/js',
 
     // SASS PREPROCESSING
-    scss: 'app/scss/app.scss',
+    scss: 'app/scss/app.sass',
     scssWatch: 'app/scss/',
     css: 'app/css',
 

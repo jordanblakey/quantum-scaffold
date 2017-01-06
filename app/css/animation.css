@@ -1,0 +1,59 @@
+.blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+.delayOffset1 {
+    animation-delay: -9.7s;
+    animation-duration: 5s;
+}
+
+.delayOffset2 {
+    animation-delay: -6.7s;
+    animation-duration: 3.1s;
+}
+
+.delayOffset3 {
+    animation-delay: -2.7s;
+    animation-duration: 4s;
+}
+
+.delayOffset4 {
+    animation-delay: -9.7s;
+    animation-duration: 1.2s;
+}
+
+.delayOffset5 {
+    animation-delay: 1.3;
+    animation-duration: 3.5s;
+}
+
+.delayOffset6 {
+    animation-delay: -1.7s;
+    animation-duration: 1.3s;
+}
+
+.delayOffset7 {
+    animation-delay: 5.3s;
+    animation-duration: 2.9s;
+}
+
+.delayOffset8 {
+    animation-delay: 3.3s;
+    animation-duration: 1.8s;
+}
+
+.delayOffset9 {
+    animation-delay: -0.7s;
+    animation-duration: 2.5s;
+}
+
+.delayOffset10 {
+    animation-delay: 0.8s;
+    animation-duration: 1.6s;
+}

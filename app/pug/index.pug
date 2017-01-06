@@ -1,37 +1,28 @@
-extends templates/layout
-include templates/mixins
-//- include templates/layout
-//- Like Sass, partials can be *included* as above.
-//- However, in Pug we can *extend* a tempate, which allows us to manipulate its output.
+doctype html
+html(lang='en')
+    head
+        title Get Sorted: Toast Grids
+        link(rel="stylesheet" type="text/css" href="css/app.css")
+        link(rel="stylesheet" type="text/css" href="css/animation.css")
+        //- meta(name="viewport" content=""
+    body
 
-block append config
-    - var currentPage = 'Home'
-    - var name = 'Danny'
-    - var age = 60
+        .container
+            include includes/_toast_grid.pug
 
-block navigation
-    ul
-        +navLink('index.html', 'Home')
-        +navLink('about.html', 'About')
-        +navLink('work.html', 'Work')
-        +navLink('contact.html', 'Contact')
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+        script(src="js/noframework.waypoints.min.js")
+        script.
 
-block header
-    h2 Hello #{name}! You are #{age} today!
-    ul
-        while wloop <= 9
-            li Testing, #{wloop++}, #{wloop++}, #{wloop++}
-
-block main
-    h1 Testing Iteration, and extends/includes, and interplolated content blocks all at the once, dawg.
-    ul
-        each fruit, i in fruitBowl
-            li Fruit #{i + 1}: #{fruit}
-
-block products
-    .products
-        +product('iPhone5', 400/300, '499')
-        +product('iPhone6', 401, '599')
-        +product('iPhone7', 402, '699')
-        +product('iPhone8', 403, '799')
-        +product('iPhone9', 404, '899')
+            var notify = function(message){
+                alert(message);
+            }
+            var waypoint = new Waypoint({
+                element: document.getElementById('github'),
+                handler: function(direction) {
+                    $('body').addClass('toasted');
+                    $('#toasting').html('~~TOASTED~~');
+                    $('#github').css('z-index', '10');
+                    },
+                    offset: 800
+                    })
