@@ -1,0 +1,75 @@
+/////////////////////////////////////////
+// HOUSEKEEPING
+/////////////////////////////////////////
+html {box-sizing: border-box;}
+*, *:before, *:after {box-sizing: inherit; -webkit-margin-before:0em; -webkit-margin-after:0em;}
+
+/////////////////////////////////////////
+// IMPORTS, VARIABLES, MIXINS
+/////////////////////////////////////////
+@import 'includes/bootstrap/_normalize';
+@import 'includes/bootstrap/_variables';
+@import 'includes/bootstrap/_glyphicons';
+@import 'includes/_animate';
+@import 'includes/_toast';
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+$breakpoint-small: 480px;
+$breakpoint-medium: 768px;
+
+.wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.4444rem;
+}
+
+/////////////////////////////////////////
+// CUSTOM SASS
+/////////////////////////////////////////
+
+body {
+    background: #000;
+    color: #0f0;
+    font-family: 'VT323', monospace;
+    font-size: 24px;
+}
+
+.row {
+    font-family: serif;
+    margin-top: 20px;
+}
+
+.box {
+    border: 1px solid #0f0;
+    padding: 5px;
+    font-family: 'VT323', monospace;
+    overflow: hidden;
+
+    img{
+        width: 30%;
+        display: block;
+        margin: 10% auto;
+    }
+}
+
+.blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+/////////////////////////////////////////
+// MEDIA QUERYS
+/////////////////////////////////////////
+
+@media (min-width: $breakpoint-small) {
+
+}
+
+@media (min-width: $breakpoint-medium) {
+
+}

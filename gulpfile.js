@@ -1,18 +1,34 @@
 // //////////////////////////////////////////////////////
-// Required
+// REQUIRED NPM PACKAGES
 // //////////////////////////////////////////////////////
 
 var gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
-    concat = require('gulp-concat'),
+
+    // CORE
+    notify = require('gulp-notify'),
+    del = require('del'),
+    rename = require('gulp-rename'),
+    cache = require('gulp-cache')
+    plumber = require('gulp-plumber'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload,
-    sass = require('gulp-sass'),
+
+    // HTML TEMPLATING
     pug = require('gulp-pug'),
-    rename = require('gulp-rename'),
-    plumber = require('gulp-plumber'),
-    del = require('del'),
+
+    // SASS
+    sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer');
+
+    // CONCATENATION & MINIFICATION
+    uglify = require('gulp-uglify'),
+    concat = require('gulp-concat'),
+    imagemin = require('gulp-imagemin');
+
+
+// //////////////////////////////////////////////////////
+// PACKAGE STRUCTURE & PATHS
+// //////////////////////////////////////////////////////
 
 var paths = {
     // PACKAGE STRUCTURE
@@ -23,16 +39,21 @@ var paths = {
     // HTML & PUG TEMPLATING
     html: 'app/**/*.html',
     pug: 'app/pug/**/*.pug',
+    pugExclude:'!app/pug/includes/**/*.pug',
 
     // JS MINIFICATION & WATCH
-    js: 'app/js/**/*.js',
+    js: 'app/js/lib/**/*.js',
     jsUnmin: '!app/js/**/*.min.js',
+    jsExclude: '!app/js/lib/exclude',
     jsdir: 'app/js',
 
     // SASS PREPROCESSING
-    scss: 'app/scss/app.sass',
+    scss: 'app/scss/app.scss',
     scssWatch: 'app/scss/',
     css: 'app/css',
+
+    // IMAGE MINIFICATION
+    images: 'app/img',
 
     // GARBAGE COLLECTION
     buildScss: 'build/scss',
@@ -40,37 +61,73 @@ var paths = {
     buildPug: 'build/pug'
 };
 
+
 // //////////////////////////////////////////////////////
-// Scripts Task
+// JAVASCRIPT TASK gulp scripts
 // //////////////////////////////////////////////////////
+
 gulp.task('scripts', function(){
-    gulp.src([paths.js, paths.jsUnmin])
+    gulp.src([paths.js, paths.jsExclude])
     .pipe(plumber())
+    // TO CONCATENATE ALL SCRIPTS,
+    // COMMENT OUT RENAME AND USE CONCAT:
+    .pipe(concat('app.min.js'))
+    // TO MINIFY INDIVIDUAL SCRIPTS,
+    // COMMENT OUT CONCAT AND USE RENAME:
     .pipe(uglify())
-    .pipe(rename({suffix:'.min'}))
-    // .pipe(concat('app.min.js'))
+    // .pipe(rename({suffix:'.min'}))
     .pipe(gulp.dest(paths.jsdir))
+    // THIS LINE SENDS JS FOLDER TO WATCH TASK.
     .pipe(reload({stream:true}));
 });
 
 // //////////////////////////////////////////////////////
-// Compass / Sass Tasks
+// SASS TASK ($ gulp sass)
 // //////////////////////////////////////////////////////
-// });
 
-// gulp.task('sass', function(){
 gulp.task('sass', function(){
     gulp.src(paths.scss)
     .pipe(plumber())
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(autoprefixer('last 2 versions'))
     .pipe(gulp.dest(paths.css))
+    // THIS LINE SENDS SCSS FOLDER TO WATCH TASK.
     .pipe(reload({stream:true}));
 });
 
+
 // //////////////////////////////////////////////////////
-// Browser-Sync Tasks
+// PUG TASKS ($ gulp pug)
 // //////////////////////////////////////////////////////
+
+gulp.task('pug', function(){
+    gulp.src([paths.pug, paths.pugExclude])
+    .pipe(pug({
+        // PUG OPTIONS HERE.
+        pretty: true
+    }))
+    .pipe(gulp.dest(paths.app));
+});
+
+
+// //////////////////////////////////////////////////////
+// IMAGES ($ gulp images)
+// //////////////////////////////////////////////////////
+
+gulp.task('images', function() {
+  gulp.src('img/**/*')
+    .pipe(plumber())
+    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(gulp.dest('img'))
+    .pipe(reload({stream:true}));
+});
+
+
+// //////////////////////////////////////////////////////
+// BROWSER-SYNC TASKS
+// //////////////////////////////////////////////////////
+
+// TASK TO RUN SERVER AT /APP
 gulp.task('browser-sync', function(){
     browserSync({
         server:{
@@ -79,7 +136,7 @@ gulp.task('browser-sync', function(){
     });
 });
 
-// task to run build server for testing final app
+// TASK TO RUN BUILD SERVER AT /BUILD
 gulp.task('build:serve', function(){
     browserSync({
         server:{
@@ -88,67 +145,71 @@ gulp.task('build:serve', function(){
     });
 });
 
+
 // //////////////////////////////////////////////////////
-// HTML Tasks
+// HTML TASKS
 // //////////////////////////////////////////////////////
+
 gulp.task('html', function(){
     gulp.src(paths.html)
+// THIS LINE SENDS HTML FOLDER TO WATCH TASK.
     .pipe(reload({stream:true}));
 });
 
-// //////////////////////////////////////////////////////
-// Pug Tasks
-// //////////////////////////////////////////////////////
-gulp.task('pug', function(){
-    return gulp.src(paths.pug)
-    .pipe(pug({
-        // Pug Options Here.
-        pretty: true
-    }))
-    .pipe(gulp.dest(paths.app));
-});
 
 // //////////////////////////////////////////////////////
-// Build Tasks
+// BUILD TASKS ($ gulp build)
 // //////////////////////////////////////////////////////
 
-// Clear out all files and folders from build folder
+// CLEAR OUT ALL FILES AND FOLDERS FROM BUILD FOLDER
 gulp.task('build:cleanfolder', function(cb){
     del([
         'build/**'
     ], cb);
 });
 
-// Task to create build directory for all files.
+// TASK TO CREATE BUILD DIRECTORY FOR ALL FILES
 gulp.task('build:copy', function(){
     return gulp.src(paths.appFiles)
     .pipe(gulp.dest(paths.build));
 });
 
-// Task to remove unwanted build files
-// List all files and directories here that you don't want to include
+// TASK TO REMOVE UNWANTED FILES FROM BUILD
+// LIST FILES AND DIRECTORIES HERE YOU DON'T WANT TO INCLUDE
 gulp.task('build:remove', ['build:copy'], function(cb){
     del([
         paths.buildScss,
+        // IF ALL WORKING, THIS CAN BE REMOVED
         // 'build/js/!(app.min.js)'
         paths.buildJsUnmin,
         paths.buildPug,
     ], cb);
 });
 
-gulp.task('build', ['build:copy', 'build:remove', 'build:serve']);
+gulp.task('build:notify', function(){
+    gulp.src(".")
+    .pipe(notify("Build successful. Serving & watching..."));
+});
+
+gulp.task('build', ['build:copy', 'build:remove', 'build:notify', 'build:serve', ]);
+
 
 // //////////////////////////////////////////////////////
-// Watch Tasks
+// WATCH TASKS ($ gulp watch)
 // //////////////////////////////////////////////////////
+
 gulp.task('watch', function(){
     gulp.watch(paths.js, ['scripts']);
     gulp.watch(paths.scss, ['sass']);
+    gulp.watch(paths.img), ['images']
     gulp.watch(paths.html, ['html']);
     gulp.watch(paths.pug, ['pug']);
+    gulp.src(".")
+    .pipe(notify("Success. Serving & watching..."));
 });
 
+
 // //////////////////////////////////////////////////////
-// Default Task
+// DEFAULT TASK ($ gulp)
 // //////////////////////////////////////////////////////
 gulp.task('default', ['scripts', 'sass', 'pug', 'html', 'browser-sync', 'watch']);
