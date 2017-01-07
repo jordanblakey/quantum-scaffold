@@ -3,6 +3,8 @@
 /////////////////////////////////////////
 html {box-sizing: border-box;}
 *, *:before, *:after {box-sizing: inherit; -webkit-margin-before:0em; -webkit-margin-after:0em;}
+.row {font-family: serif;}
+
 
 /////////////////////////////////////////
 // IMPORTS, VARIABLES, MIXINS
@@ -12,7 +14,7 @@ html {box-sizing: border-box;}
 @import 'includes/bootstrap/_glyphicons';
 @import 'includes/_animate';
 @import 'includes/_toast';
-@import url('https://fonts.googleapis.com/css?family=VT323');
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
 $breakpoint-small: 480px;
 $breakpoint-medium: 768px;
@@ -30,19 +32,18 @@ $breakpoint-medium: 768px;
 body {
     background: #000;
     color: #0f0;
-    font-family: 'VT323', monospace;
-    font-size: 24px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
 }
 
 .row {
-    font-family: serif;
     margin-top: 20px;
 }
 
 .box {
     border: 1px solid #0f0;
     padding: 5px;
-    font-family: 'VT323', monospace;
+    font-family: 'Press Start 2P', cursive;
     overflow: hidden;
 
     img{
@@ -50,7 +51,7 @@ body {
         display: block;
         margin: 10% auto;
     }
-} 
+}
 
 .blink {
     animation: blink-animation 1s steps(5, start) infinite;
