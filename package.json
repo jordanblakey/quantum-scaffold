@@ -1,26 +1,35 @@
 {
-  "name": "Quantum Scaffold",
-  "version": "0.0.0",
-  "description": "A nearly almost complete build system on NPM.",
-  "repository": {
-    "type": "git",
-  },
-  "author": "Jordan Blakey",
-  "license": "MIT",
-  },
-  "devDependencies": {
-    "browser-sync": "^2.18.5",
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-cache": "^0.4.5",
-    "gulp-concat": "^2.6.1",
-    "gulp-imagemin": "^3.1.1",
-    "gulp-notify": "^2.2.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-pug": "^3.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.0.0",
-    "gulp-uglify": "^2.0.0",
-  }
+    "name": "quantum-scaffold",
+    "version": "1.0.0",
+    "description": "A nearly almost complete build system on NPM.",
+    "main": "gulpfile.js",
+    "dependencies": {},
+    "devDependencies": {
+        "browser-sync": "^2.18.5",
+        "del": "^2.2.2",
+        "gulp": "^3.9.1",
+        "gulp-autoprefixer": "^3.1.1",
+        "gulp-cache": "^0.4.5",
+        "gulp-concat": "^2.6.1",
+        "gulp-imagemin": "^3.1.1",
+        "gulp-notify": "^2.2.0",
+        "gulp-plumber": "^1.1.0",
+        "gulp-pug": "^3.2.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^3.0.0",
+        "gulp-uglify": "^2.0.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jordanblakey/quantum-scaffold.git"
+    },
+    "author": "Jordan Blakey",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jordanblakey/quantum-scaffold/issues"
+    },
+    "homepage": "https://github.com/jordanblakey/quantum-scaffold#readme"
 }
