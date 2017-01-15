@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     del = require('del'),
     rename = require('gulp-rename'),
-    cache = require('gulp-cache')
+    cache = require('gulp-cache'),
     plumber = require('gulp-plumber'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload,
@@ -18,7 +18,7 @@ var gulp = require('gulp'),
 
     // SASS
     sass = require('gulp-sass'),
-    autoprefixer = require('gulp-autoprefixer');
+    autoprefixer = require('gulp-autoprefixer'),
 
     // CONCATENATION & MINIFICATION
     uglify = require('gulp-uglify'),
@@ -44,7 +44,7 @@ var paths = {
     // JS MINIFICATION & WATCH
     js: 'app/js/lib/**/*.js',
     jsUnmin: '!app/js/**/*.min.js',
-    jsExclude: '!app/js/lib/exclude',
+    jsExclude: '!app/js/lib/_exclude/**/*.js',
     jsdir: 'app/js',
 
     // SASS PREPROCESSING
@@ -201,7 +201,7 @@ gulp.task('build', ['build:copy', 'build:remove', 'build:notify', 'build:serve',
 gulp.task('watch', function(){
     gulp.watch(paths.js, ['scripts']);
     gulp.watch(paths.scss, ['sass']);
-    gulp.watch(paths.img), ['images']
+    gulp.watch(paths.img, ['images']);
     gulp.watch(paths.html, ['html']);
     gulp.watch(paths.pug, ['pug']);
     gulp.src(".")

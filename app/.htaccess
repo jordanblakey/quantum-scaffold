@@ -1,0 +1,137 @@
+####################
+# GZIP COMPRESSION #
+####################
+
+    SetOutputFilter DEFLATE
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
+
+
+####################
+# PHP MAGIC QUOTES #
+####################
+
+    <ifmodule mod_php4.c>
+        php_flag magic_quotes_gpc off
+    </ifmodule>
+
+
+#########################
+# IF MOD EXPIRES ON     #
+#########################
+
+    <ifmodule mod_expires.c>
+        ExpiresActive On
+        ExpiresDefault "access plus 1 seconds"
+
+        # HTML files expire after 2 hours
+        ExpiresByType text/html "access plus 7200 seconds"
+
+        # GIF files expire after 6 days
+        ExpiresByType image/gif "access plus 518400 seconds"
+
+        # JPEG files expire after 6 days
+        ExpiresByType image/jpeg "access plus 518400 seconds"
+
+        # PNG files expire after 6 days
+        ExpiresByType image/png "access plus 518400 seconds"
+
+        # CSS files expire after 6 days
+        ExpiresByType text/css "access plus 518400 seconds"
+
+        # JS files expire after 60 hours (2.5 days)
+        ExpiresByType text/javascript "access plus 216000 seconds"
+
+        # JS files expire after 60 hours (2.5 days)
+        ExpiresByType application/x-javascript "access plus 216000 seconds"
+    </ifmodule>
+
+
+#########################
+# IF MOD HEADERS ON     #
+#########################
+
+    <ifmodule mod_headers.c>
+        # Cache specified files for 6 days
+        <filesmatch "\.(ico|flv|jpg|jpeg|png|gif|css|swf)$">
+            Header set Cache-Control "max-age=518400, public"
+        </filesmatch>
+
+        # Cache HTML files for a couple hours
+        <filesmatch "\.(html|htm)$">
+            Header set Cache-Control "max-age=7200, private, must-revalidate"
+        </filesmatch>
+
+        # Cache PDFs for a day
+        <filesmatch "\.(pdf)$">
+            Header set Cache-Control "max-age=86400, public"
+        </filesmatch>
+
+        # Cache Javascripts for 2.5 days
+        <filesmatch "\.(js)$">
+            Header set Cache-Control "max-age=216000, private"
+        </filesmatch>
+    </ifmodule>
+
+
+#########################
+# DIRECTORY BROWSING     #
+#########################
+
+    #DENY BROWSING
+    Options All -Indexes
+
+    #ALLOW BROWSING
+    Options All +Indexes
+
+
+#########################
+# MOD REWRITE (PHP, WP) #
+#########################
+
+    #INSERT HERE
+
+
+#########################
+# DOWNLOAD W/O PROMPT   #
+#########################
+
+    AddType application/octet-stream .pdf
+    AddType application/octet-stream .zip
+    AddType application/octet-stream .mp3
+
+
+#########################
+# SET A FOLDER          #
+#########################
+
+    #DirectoryIndex mypage.html
+
+
+#########################
+# ENFORCED SERVE HTTPS  #
+#########################
+
+    #RewriteEngine OnRewriteCond %{HTTPS} !on
+    #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+
+#########################
+# PHP PARAMS (WP)       #
+#########################
+
+    # USEFUL FOR WP UPLOADS
+    php_value upload_max_filesize 15M
+
+    # HTTP POST LIMIT
+    php_value post_max_size 10M
+
+    # SCRIPT EXECUTION TIMEOUT IN SECONDS
+    php_value max_execution_time 240
+
+    # NOT SURE ABOUT THIS ONE
+    php_value max_input_time 180
