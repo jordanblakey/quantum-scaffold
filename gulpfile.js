@@ -23,8 +23,9 @@ var gulp = require('gulp'),
     // CONCATENATION & MINIFICATION
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
-    imagemin = require('gulp-imagemin');
-
+    imagemin = require('gulp-imagemin'),
+    uncss = require('gulp-uncss'),
+    mincss = require('gulp-minify-css');
 
 // //////////////////////////////////////////////////////
 // PACKAGE STRUCTURE & PATHS
@@ -38,6 +39,7 @@ var paths = {
 
     // HTML & PUG TEMPLATING
     html: 'app/**/*.html',
+    php: '',
     pug: 'app/pug/**/*.pug',
     pugExclude:'!app/pug/includes/**/*.pug',
 
@@ -88,8 +90,13 @@ gulp.task('scripts', function(){
 gulp.task('sass', function(){
     gulp.src(paths.scss)
     .pipe(plumber())
+    // outputStyle values: compressed, expanded
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(autoprefixer('last 2 versions'))
+    .pipe(uncss( {html: [paths.html] } ))
+    .pipe(mincss({
+        keepSpecialComments: 0
+    }))
     .pipe(gulp.dest(paths.css))
     // THIS LINE SENDS SCSS FOLDER TO WATCH TASK.
     .pipe(reload({stream:true}));

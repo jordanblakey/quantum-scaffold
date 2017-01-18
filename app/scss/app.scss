@@ -1,6 +1,7 @@
 /////////////////////////////////////////
 // HOUSEKEEPING
 /////////////////////////////////////////
+
 html {box-sizing: border-box;}
 *, *:before, *:after {box-sizing: inherit; -webkit-margin-before:0em; -webkit-margin-after:0em;}
 .row {font-family: serif;}
@@ -9,22 +10,39 @@ html {box-sizing: border-box;}
 /////////////////////////////////////////
 // IMPORTS, VARIABLES, MIXINS
 /////////////////////////////////////////
-@import 'includes/bootstrap/_normalize';
-// @import 'includes/bootstrap/_variables';
-// @import 'includes/bootstrap/_glyphicons';
-// @import 'includes/_fontello-social-icons';
-@import 'includes/_animate';
-@import 'includes/_toast';
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
-$breakpoint-small: 480px;
-$breakpoint-medium: 768px;
+// MOST ESSENTIAL PARTS OF BOOTSTRAP
+    @import 'includes/bootstrap/_normalize';
+    // @import 'includes/bootstrap/_variables';
+    // @import 'includes/bootstrap/_glyphicons';
 
-.wrap {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 1.4444rem;
-}
+// ROLL YOUR OWN BOOTSTRAP | DOCS: http://getbootstrap.com/css
+    // @import 'includes/_bootstrap_sprockets';
+
+// ROLL YOUR OWN FOUNDATION | DOCS: http://foundation.zurb.com/sites/docs
+    // @import 'includes/_foundation_sprockets';
+
+// TOAST GRID & BREAKPOINT VARIABLES | https://github.com/daneden/toast
+    @import 'includes/_toast';
+    $breakpoint-small: 480px;
+    $breakpoint-medium: 768px;
+    $breakpoint-large: 1200px;
+
+    .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 1.4444rem;
+    }
+
+// ROLL YOUR OWN ICON FONT | DOCS: http://fontello.com
+    // @import 'includes/_fontello-social-icons';
+
+// SIMPLE ANIMATION LIBRARY | DOCS: https://github.com/daneden/animate.css
+    @import 'includes/_animate';
+
+// WEB FONTS |
+    @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
 
 /////////////////////////////////////////
 // CUSTOM SASS
@@ -63,6 +81,7 @@ body {
         visibility: hidden;
     }
 }
+
 
 /////////////////////////////////////////
 // MEDIA QUERYS
