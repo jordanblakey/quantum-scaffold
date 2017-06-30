@@ -5,12 +5,12 @@
 var gulp = require('gulp'),
 
     // CORE
-    notify = require('gulp-notify'),
-    del = require('del'),
-    rename = require('gulp-rename'),
-    cache = require('gulp-cache'),
-    plumber = require('gulp-plumber'),
-    browserSync = require('browser-sync'),
+    notify = require('gulp-notify'), // Gulp plugin to send messages based on Vinyl Files or Errors to Mac OS X, Linux or Windows using the node-notifier module. Fallbacks to Growl or simply logging. [https://github.com/mikaelbr/gulp-notify]
+    del = require('del'), // Similar to rimraf, but with a Promise API and support for multiple files and globbing. It also protects you against deleting the current working directory and above. [https://www.npmjs.com/package/del]
+    rename = require('gulp-rename'), // gulp-rename is a gulp plugin to rename files easily. [https://www.npmjs.com/package/gulp-rename]
+		cache = require('gulp-cache'), // A temp file based caching proxy task for gulp. [https://www.npmjs.com/package/gulp-cache]
+		plumber = require('gulp-plumber'), // This 🐒-patch plugin is fixing issue with Node Streams piping. For explanations, read this small article. Briefly it replaces pipe method and removes standard onerror handler on error event, which unpipes streams on error by default. [https://www.npmjs.com/package/gulp-plumber]
+		browserSync = require('browser-sync'), // With each web page, device and browser, testing time grows exponentially. From live reloads to URL pushing, form replication to click mirroring, Browsersync cuts out repetitive manual tasks. [https://www.browsersync.io/]
     reload = browserSync.reload,
 
     // HTML TEMPLATING
@@ -21,11 +21,15 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
 
     // CONCATENATION & MINIFICATION
-    uglify = require('gulp-uglify'),
-    concat = require('gulp-concat'),
-    imagemin = require('gulp-imagemin'),
-    uncss = require('gulp-uncss'),
+
+		uglify = require('gulp-uglify'), // JavaScript parser / mangler / compressor / beautifier toolkit [https://www.npmjs.com/package/gulp-uglify]
+		concat = require('gulp-concat'), // This will concat files by your operating systems newLine. It will take the base directory from the first file that passes through [https://www.npmjs.com/package/gulp-concat]
+		imagemin = require('gulp-imagemin'), // Minify PNG, JPEG, GIF and SVG images [https://github.com/sindresorhus/gulp-imagemin]
+		uncss = require('gulp-uncss'), // UnCSS is a tool that removes unused CSS from your stylesheets. It works across multiple files and supports Javascript-injected CSS.
     mincss = require('gulp-minify-css');
+    // postcss = require('gulp-postcss'), // Pipe CSS through PostCSS processors with a single parse. [https://github.com/postcss/gulp-postcss]
+    // cssnano = require('cssnano'), // cssnano takes your nicely formatted CSS and runs it through many focused optimisations, to ensure that the final result is as small as possible for a production environment. [http://cssnano.co/]
+
 
 // //////////////////////////////////////////////////////
 // PACKAGE STRUCTURE & PATHS
